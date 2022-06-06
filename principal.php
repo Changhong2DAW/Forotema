@@ -1,3 +1,4 @@
+
 <section>
             <div id="contenedor-inicio">
                 <div class="cont-0">
@@ -43,44 +44,41 @@
               </div> 
               
               <div class="cont-2">
+                  
                 <span class="titulo-cont2">Categorias</span>
-                <div class="categorias">
-                <span class="icono-categoria"><i class="fa-solid fa-house" class="icono-cat"></i></span>
-                <div class="titulo-categoria">FACEBOOK</div>
-                <div class="ultimo-categoria">JUAJOSE HACE 3 HORAS</div>
-                </div>
+                <?php
+                $filas=categorie::imprimircategoria();
+                foreach($filas as $fila){
+                   ?>
+                   <div class="categorias">
+                       <?php
+                    foreach($fila as $indice=>$valor){
+                        
+                        if($indice=="cat_icon"){
+                            ?>
+                            <span class="icono-categoria"><?php echo("&".$valor)?></span>
+                            <?php
+                        }
+                        if($indice=="cat_id"){
+                            ?>
+                            <div class="titulo-categoria"><a href="<?php echo("?p=cat&e=".$valor)?>">
+                            <?php
+                        }
 
-                <div class="categorias">
-                    <span class="icono-categoria"><i class="fa-solid fa-house" class="icono-cat"></i></span>
-                    <div class="titulo-categoria">FACEBOOK</div>
-                    <div class="ultimo-categoria">JUAJOSE HACE 3 HORAS</div>
-                    </div>
-                
-                <div class="categorias">
-                        <span class="icono-categoria"><i class="fa-solid fa-house" class="icono-cat"></i></span>
-                        <div class="titulo-categoria">FACEBOOK</div>
-                        <div class="ultimo-categoria">JUAJOSE HACE 3 HORAS</div>
-                </div>
+                        if($indice=="cat_name"){
+                           ?>
+                            <?php echo($valor)?></a></div>
+                            <div class="ultimo-categoria">JUAJOSE HACE 3 HORAS</div>
+                            <?php
+                        }
 
-
-                <div class="categorias">
-                    <span class="icono-categoria"><i class="fa-solid fa-house" class="icono-cat"></i></span>
-                    <div class="titulo-categoria">FACEBOOK</div>
-                    <div class="ultimo-categoria">JUAJOSE HACE 3 HORAS</div>
+                    }
+                ?>
                 </div>
-
-                <div class="categorias">
-                    <span class="icono-categoria"><i class="fa-solid fa-house" class="icono-cat"></i></span>
-                    <div class="titulo-categoria">FACEBOOK</div>
-                    <div class="ultimo-categoria">JUAJOSE HACE 3 HORAS</div>
-                </div>
-                
-                <div class="categorias">
-                    <span class="icono-categoria"><i class="fa-solid fa-house" class="icono-cat"></i></span>
-                    <div class="titulo-categoria">FACEBOOK</div>
-                    <div class="ultimo-categoria">JUAJOSE HACE 3 HORAS</div>
-                </div>
-                
+                <?php
+                }
+                ?>
               </div> 
             </div>
         </section>
+    

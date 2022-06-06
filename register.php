@@ -39,9 +39,9 @@ if($pass1!=$pass2){
 }     
 }
 if(count($errores)==0 && isset($_POST["register"])){
-$user = new user($username,$pass1,$email,date("j-n-Y"),1);
-$comprobacion1= $user->comprobaruser();
-$comprobacion2= $user->comprobaremail();
+$user = new user($username,$pass1,$email,date("j-n-Y"),1,"icono/default.jpg");
+$comprobacion1= user::comprobaruser($username);
+$comprobacion2= user::comprobaremail($email);
 if($comprobacion1==true){
   $msg.="<p>Ya existe este usuario.</p>";
 }
@@ -66,7 +66,7 @@ if($comprobacion1==false && $comprobacion2==false){
 
 }
 else{
-
+if(!isset($_SESSION["sesion"])){
 
 
 ?>
@@ -137,6 +137,23 @@ else{
            </form>
          </div>
          <?php
+}else{
+  ?>
+  <section class="login-section">
+       <div class="login-box2">
+        <h2>Ya has iniciado sesión</h2>
+        <p class="login-exito">Se esta redirigiendo a la pagina de inicio. Espere un momento.</p>
+        <div class="loader"></div>
+      </div>
+  
+    <script>
+      function r(){
+        location.href="<?php echo($_SERVER["PHP_SELF"])?>"
+      }
+      setTimeout("r()",2000);
+    </script>
+  <?php
+}
 }
          ?>
        </section>

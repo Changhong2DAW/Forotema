@@ -29,29 +29,50 @@ $existe=false;
      array_push($errores,"Error 3"); 
     }
     else{
+      foreach($existe as $indice=>$valor){
+        if($indice=="user_email"){
+          $user_email=$valor;
+        }
+          if($indice=="user_id"){
+            $user_id=$valor;
+          }
+          if($indice=="user_name"){
+            $user_name=$valor;
+          }
+          if($indice=="user_level"){
+            $user_level=$valor;
+          }
+          if($indice=="user_pass"){
+            $user_password=$valor;
+          }
+      }
       $existe=true;
     }
   }
   if($existe==true){
-    $_SESSION['user_name'] = $user;
+    $_SESSION['user_name'] = $user_name;
+    $_SESSION['user_email'] = $user_email;
+    $_SESSION['user_id'] = $user_id;
+    $_SESSION['user_level'] = $user_level;
+    $_SESSION['user_password'] = $user_password;
     $_SESSION['sesion'] = true;
     ?>
     <section class="login-section">
-       <div class="login-box">
+       <div class="login-box2">
         <h2>Inicio de sesión correcto</h2>
         <p class="login-exito">Se esta redirigiendo a la pagina de inicio. Espere un momento.</p>
+        <div class="loader"></div>
       </div>
     </section>
-    <?php
-    ?>
     <script>
       function r(){
         location.href="<?php echo($_SERVER["PHP_SELF"])?>"
       }
-      setTimeout("r()",5000);
+      setTimeout("r()",2000);
     </script>
     <?php
   }else{
+    if(!isset($_SESSION["sesion"])){
 ?>
 <section class="login-section">
        <div class="login-box">
@@ -97,5 +118,23 @@ $existe=false;
       </div>
     </section>
             <?php
+  }
+else{
+  ?>
+   <section class="login-section">
+       <div class="login-box2">
+        <h2>Ya has iniciado sesión</h2>
+        <p class="login-exito">Se esta redirigiendo a la pagina de inicio. Espere un momento.</p>
+        <div class="loader"></div>
+      </div>
+    </section>
+    <script>
+      function r(){
+        location.href="<?php echo($_SERVER["PHP_SELF"])?>"
+      }
+      setTimeout("r()",2000);
+    </script>
+  <?php
+}
   }
   ?>
