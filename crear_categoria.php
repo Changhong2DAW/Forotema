@@ -31,7 +31,7 @@ if(isset($_POST["cat-desc"])){
 
 }
 if(count($errores)==0 && isset($_POST["crear-cat"])){
-		$cat= new categorie($cat_icono,$cat_name,$cat_des);
+		$cat= new categorie($cat_icono,$cat_name,$cat_des,rand(1,6));
 		$msg=$cat->crearcat();
 ?>
 <section class="login-section">
@@ -73,7 +73,7 @@ else{
               ?>
     <form action="index.php?p=crear_categoria" method="post">
 <div class="cat-div"><span class="pregunta-cat">Elige un icono:</span>
-<select name="icono">
+<select name="icono" class="select-cat">
      	<option value='#xf26e'>&#xf26e;</option>
 		<option value='#xf2b9'>&#xf2b9;</option>
 		<option value='#xf2ba'>&#xf2ba;</option>
@@ -868,7 +868,7 @@ else{
                }
              }
               ?>
-        <input type="text" name="cat-name" value="<?php if(isset($cat_name))echo($cat_name)?>">
+        <input type="text" class="nombre-cat"name="cat-name" value="<?php if(isset($cat_name))echo($cat_name)?>">
 
         </div>
         <div class="cat-div">

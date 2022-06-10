@@ -101,6 +101,12 @@ Class user{
         $result=$conexion->query($sql);
         Conexion::desconectarBD($conexion); 
     }
+    static function editarlevel($user_id,$userlevel){
+        $conexion=Conexion::conectarBD();
+        $sql = "UPDATE users SET user_level = '$userlevel' WHERE users.user_id = '$user_id'";
+        $result=$conexion->query($sql);
+        Conexion::desconectarBD($conexion); 
+    }
     static function editaremail($user_id,$email){
         $conexion=Conexion::conectarBD();
         $sql = "UPDATE users SET user_email = '$email' WHERE users.user_id = '$user_id'";
@@ -114,5 +120,63 @@ Class user{
         $result=$conexion->query($sql);
         Conexion::desconectarBD($conexion); 
     }
+    static function consultar_foto_user($user_id){
+        $conexion=Conexion::conectarBD();
+        $sql="SELECT user_img,user_name,user_date,user_level FROM users where user_id=$user_id";
+        $result=$conexion->query($sql);
+        if ($result->num_rows > 0){
+            $linea=$result->fetch_assoc();
+        }
+        else{
+            $linea=false;
+        }
+        $result->free();
+        Conexion::desconectarBD($conexion); 
+        return $linea;
+    }
+    static function user_totales(){
+		
+        $conexion=Conexion::conectarBD();
+        $sql="SELECT *  FROM users ";
+        $resultado = $conexion->query($sql);
+        if ($conexion->error!="") { 
+            echo "Error: La ejecución de la consulta falló debido a: \n"; 
+            echo "Query: " . $conexion . "\n"; 
+            echo "Errno: " . $conexion->errno . "\n"; 
+            echo "Error: " . $conexion->error . "\n"; 
+            exit; 
+        }
+        $num_filas=$resultado->num_rows;
+        $resultado->free();
+        Conexion::desconectarBD($conexion);
+        return $num_filas;
+        
+    }
+    static function imprimir_users($cuantos,$inicio){
+        $filas=array();
+        $conexion=Conexion::conectarBD();
+        $sql="SELECT * FROM users ORDER BY user_id ASC limit $inicio,$cuantos";
+        $resultado = $conexion->query($sql);
+        while($fila = $resultado->fetch_assoc()){ 
+            $filas[]=$fila;
+        }
+        $resultado->free(); 
+        Conexion::desconectarBD($conexion);
+        return $filas;
+    }
+    static function imprimir_user_concreto($user_id){
+        $conexion=Conexion::conectarBD();
+        $sql = "SELECT * FROM users where user_id=$user_id";
+        $result=$conexion->query($sql);
+        if ($result->num_rows > 0){
+            $linea=$result->fetch_assoc();
+        }
+        else{
+            $linea=false;
+        }
+        $result->free();
+        Conexion::desconectarBD($conexion); 
+        return $linea;
+    }	
 }
 ?>

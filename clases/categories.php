@@ -4,11 +4,12 @@ Class categorie{
     private $cat_icon;
     private $cat_name;
     private $cat_description;
-
-    function __construct($cat_icon,$cat_name,$cat_description){
+    private $cat_color;
+    function __construct($cat_icon,$cat_name,$cat_description,$cat_color){
         $this->cat_icon=$cat_icon;
         $this->cat_name=$cat_name;
         $this->cat_description=$cat_description;
+        $this->cat_color=$cat_color;
     }
     static function comprobarcat($cat_name){
         $conexion=Conexion::conectarBD();
@@ -27,7 +28,7 @@ Class categorie{
     public function crearcat(){
         $msg="";
         $conexion=Conexion::conectarBD();
-        $sql = "insert into categories values('".$this->cat_icon."',null,'".$this->cat_name."','".$this->cat_description."')";
+        $sql = "insert into categories values('".$this->cat_icon."',null,'".$this->cat_name."','".$this->cat_description."',".$this->cat_color.")";
         if ($conexion->query($sql))
         $msg="<p>Categoria creada correctamente.</p>";
         
@@ -51,6 +52,34 @@ Class categorie{
         $resultado->free(); 
         Conexion::desconectarBD($conexion);
         return $filas;
+    }
+    static function consultar_categoria($cat_id){
+        $conexion=Conexion::conectarBD();
+        $sql="SELECT * FROM categories where cat_id=$cat_id";
+        $result=$conexion->query($sql);
+        if ($result->num_rows > 0){
+            $linea=$result->fetch_assoc();
+        }
+        else{
+            $linea=false;
+        }
+        $result->free();
+        Conexion::desconectarBD($conexion); 
+        return $linea;
+    }
+    static function consultar_color_categoria($cat_id){
+        $conexion=Conexion::conectarBD();
+        $sql="SELECT cat_color FROM categories where cat_id=$cat_id";
+        $result=$conexion->query($sql);
+        if ($result->num_rows > 0){
+            $linea=$result->fetch_assoc();
+        }
+        else{
+            $linea=false;
+        }
+        $result->free();
+        Conexion::desconectarBD($conexion); 
+        return $linea;
     }
     static function existe_cat($cat_id){
         $conexion=Conexion::conectarBD();

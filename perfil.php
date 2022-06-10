@@ -190,7 +190,7 @@ else{
             <input type="submit" value="Editar perfil" name="editar-perfil"/>
       </div>
       <div class="input-box2 button">
-            <input type="button" value="Crear una entrada" onclick="link_crear_entrada()" />
+            <input type="button" value="Entradas" onclick="link_mis_entradas()" />
       </div>
       <?php
       if($user_level==0){

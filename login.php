@@ -45,6 +45,10 @@ $existe=false;
           if($indice=="user_pass"){
             $user_password=$valor;
           }
+          if($indice=="user_date"){
+            $user_date=$valor;
+          }
+
       }
       $existe=true;
     }
@@ -55,6 +59,7 @@ $existe=false;
     $_SESSION['user_id'] = $user_id;
     $_SESSION['user_level'] = $user_level;
     $_SESSION['user_password'] = $user_password;
+    $_SESSION['user_date'] = $user_date;
     $_SESSION['sesion'] = true;
     ?>
     <section class="login-section">
